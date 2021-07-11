@@ -1,5 +1,4 @@
 import { useHistory, useParams } from 'react-router-dom'
-// import { useAuth } from '../hooks/useAuth'
 import { useRoom } from '../hooks/useRoom'
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
