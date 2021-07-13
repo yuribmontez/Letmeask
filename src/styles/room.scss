@@ -65,7 +65,7 @@
 
             .form-footer {
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
                 align-items: center;
                 margin-top: 16px;
 
@@ -103,6 +103,13 @@
                     }
                 }
             }
+        }
+
+        .empty-questions {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
         }
 
         .question-list {

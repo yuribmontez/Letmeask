@@ -10,6 +10,7 @@ import { database } from '../services/firebase'
 import toast, { Toaster } from 'react-hot-toast';
 
 import logoImg from '../assets/images/logo.svg'
+import noQuestions from '../assets/images/no-questions.svg'
 
 import '../styles/room.scss'
 
@@ -97,6 +98,12 @@ export function Room() {
                         <Button type="submit" disabled={!user}>Enviar pergunta</Button>
                     </div>
                 </form>
+
+                { questions.length < 1 && (
+                    <div className='empty-questions'>
+                        <img src={noQuestions} alt="Sem perguntas" />
+                    </div>
+                ) }
 
                 <div className="question-list">
                     {questions.map(question => {
