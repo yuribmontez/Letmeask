@@ -13,3 +13,54 @@ body {
 body, input, button, select, textarea {
     font: 400 16px 'Roboto', sans-serif;
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    position: relative;
+    top: 280px;
+    margin: auto auto;
+    background: #F8F8F8;
+    border-radius: 10px;
+    height: 360px;
+    width: 590px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    img {
+        width: 40px;
+        height: 40px;
+    }
+
+    p {
+        color: #737380;
+    }
+
+    > div {
+        margin-top: 40px;
+        display: flex;
+        gap: 10px;
+    }
+
+    button {
+        width: 150px;
+        &:first-child {
+            background: #DBDCDD;
+            color: #737380;
+        }
+
+        background: #E73F5D;
+        color: #fff;
+    }
+}
