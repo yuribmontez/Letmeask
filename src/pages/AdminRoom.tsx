@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useRoom } from '../hooks/useRoom'
 import { Button } from '../components/Button'
@@ -12,6 +12,7 @@ import deleteImg from '../assets/images/delete.svg'
 import checkImg from '../assets/images/check.svg'
 import answerImg from '../assets/images/answer.svg'
 import noQuestions from '../assets/images/no-questions.svg'
+import endRoom from '../assets/images/end-room-icon.svg'
 import trash from '../assets/images/trash-icon.svg'
 
 import '../styles/room.scss'
@@ -25,7 +26,8 @@ export function AdminRoom() {
     const history = useHistory();
     const params = useParams<RoomParams>();
     const roomId = params.id;
-    const [openModal, setOpenModal] = useState<string | undefined>()
+    const [openDeleteModal, setOpenDeleteModal] = useState<string | undefined>()
+    const [endRoomModal, setEndRoomModal] = useState<boolean>(false)
     const { questions, title } = useRoom(roomId);
 
     async function handleEndRoom() {
@@ -60,9 +62,23 @@ export function AdminRoom() {
                     <img src={logoImg} alt="Letmeask" />
                     <div>
                         <RoomCode code={roomId}/>
-                        <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
+                        <Button isOutlined onClick={() => setEndRoomModal(true)}>Encerrar sala</Button>
                     </div>
                 </div>
+                <Modal
+                  isOpen={endRoomModal === true}
+                  onRequestClose={() => setEndRoomModal(false)}
+                  className="modal-content"
+                  overlayClassName="modal-overlay"
+                >
+                    <img src={endRoom} alt="End room icon" />
+                    <h1>Encerrar sala</h1>
+                    <p>Tem certeza que você deseja encerrar esta sala?</p>
+                    <div>
+                      <Button onClick={() => setEndRoomModal(false)}>Cancelar</Button>
+                      <Button onClick={handleEndRoom}>Sim, encerrar</Button>
+                    </div>
+                </Modal>
             </header>
 
             <main>
@@ -105,14 +121,14 @@ export function AdminRoom() {
                               )}
                               <button
                                 type="button"
-                                onClick={() => setOpenModal(question.id)}
+                                onClick={() => setOpenDeleteModal(question.id)}
                               >
                                   <img src={deleteImg} alt="Remover pergunta" />
                               </button>
                             </Question>
                             <Modal
-                              isOpen={openModal === question.id}
-                              onRequestClose={() => setOpenModal(undefined)}
+                              isOpen={openDeleteModal === question.id}
+                              onRequestClose={() => setOpenDeleteModal(undefined)}
                               className="modal-content"
                               overlayClassName="modal-overlay"
                             >
@@ -120,7 +136,7 @@ export function AdminRoom() {
                               <h1>Excluir pergunta</h1>
                               <p>Tem certeza que você deseja excluir esta pergunta?</p>
                               <div>
-                                <Button onClick={() => setOpenModal(undefined)}>Cancelar</Button>
+                                <Button onClick={() => setOpenDeleteModal(undefined)}>Cancelar</Button>
                                 <Button onClick={() => handleDeleteQuestion(question.id)}>Sim, excluir</Button>
                               </div>
                             </Modal>
