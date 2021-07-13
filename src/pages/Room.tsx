@@ -1,11 +1,14 @@
 import { FormEvent, useState } from 'react'
 import { useParams } from 'react-router-dom'
+
 import { useAuth } from '../hooks/useAuth'
 import { useRoom } from '../hooks/useRoom'
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
 import { Question } from '../components/Question'
 import { database } from '../services/firebase'
+import toast, { Toaster } from 'react-hot-toast';
+
 import logoImg from '../assets/images/logo.svg'
 
 import '../styles/room.scss'
@@ -29,7 +32,9 @@ export function Room() {
         }
 
         if (!user) {
-            throw new Error('You must be logged in');
+            throw toast.error('You must be logged in', {style: {
+                border: '1px solid red',
+            }});
         }
 
         const question = {
@@ -59,7 +64,7 @@ export function Room() {
 
     return (
         <div id="page-room">
-
+        <Toaster position="top-left" />
             <header>
                 <div className="content">
                     <img src={logoImg} alt="Letmeask" />
