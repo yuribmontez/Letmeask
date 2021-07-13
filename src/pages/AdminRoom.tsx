@@ -6,6 +6,7 @@ import { RoomCode } from '../components/RoomCode'
 import { Question } from '../components/Question'
 import { database } from '../services/firebase'
 import Modal from 'react-modal';
+import Switch from "react-switch";
 
 import logoImg from '../assets/images/logo.svg'
 import deleteImg from '../assets/images/delete.svg'
@@ -28,6 +29,7 @@ export function AdminRoom() {
     const roomId = params.id;
     const [openDeleteModal, setOpenDeleteModal] = useState<string | undefined>()
     const [endRoomModal, setEndRoomModal] = useState<boolean>(false)
+    const [checked, setChecked] = useState(false)
     const { questions, title } = useRoom(roomId);
 
     async function handleEndRoom() {
@@ -67,8 +69,17 @@ export function AdminRoom() {
                 <div className="content">
                     <img src={logoImg} alt="Letmeask" />
                     <div>
+                        <div className='teste'></div>
                         <RoomCode code={roomId}/>
                         <Button isOutlined onClick={() => setEndRoomModal(true)}>Encerrar sala</Button>
+                        <Switch 
+                          checked={checked}
+                          onChange={() => setChecked(!checked)}
+                          className='switch'
+                          uncheckedIcon={false}
+                          checkedIcon={false}
+                          onColor="#714DDE"
+                        />
                     </div>
                 </div>
                 <Modal

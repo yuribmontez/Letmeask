@@ -4,10 +4,10 @@
         border-bottom: 1px solid #e2e2e2;
 
         .content {
-            max-width: 1120px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
+            max-width: 1120px;
+            margin: 0 auto;
             align-items: center;
 
             >img {
@@ -21,6 +21,15 @@
                 button {
                     height: 40px;
                 }
+
+                .switch{
+                    top: 6px;
+                    margin-left: 10px;
+                }
+            }
+
+            .teste {
+                flex: 0.8 !important;
             }
         }
     }

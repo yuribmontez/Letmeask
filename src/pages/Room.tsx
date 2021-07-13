@@ -8,6 +8,7 @@ import { RoomCode } from '../components/RoomCode'
 import { Question } from '../components/Question'
 import { database } from '../services/firebase'
 import toast, { Toaster } from 'react-hot-toast';
+import Switch from "react-switch";
 
 import logoImg from '../assets/images/logo.svg'
 import noQuestions from '../assets/images/no-questions.svg'
@@ -23,6 +24,7 @@ export function Room() {
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const [newQuestion, setNewQuestion] = useState('')
+    const [checked, setChecked] = useState(false)
     const { questions, title } = useRoom(roomId);
 
     async function handleSendQuestion(event: FormEvent) {
@@ -69,7 +71,15 @@ export function Room() {
             <header>
                 <div className="content">
                     <img src={logoImg} alt="Letmeask" />
+                    <div className='teste'></div>
                     <RoomCode code={roomId}/>
+                    <Switch 
+                        checked={checked}
+                        onChange={() => setChecked(!checked)}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        onColor="#714DDE"
+                    />
                 </div>
             </header>
 
