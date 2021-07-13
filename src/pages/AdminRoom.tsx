@@ -48,10 +48,16 @@ export function AdminRoom() {
         });
     }
 
-    async function handleHighlightQuestion(questionId: string) {
-        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
-            isHighlighted: true,
-        });
+    async function handleHighlightQuestion(questionId: string, isHighlighted: boolean) {
+        if (isHighlighted) {
+            await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+                isHighlighted: false,
+            });
+        } else {
+            await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+                isHighlighted: true,
+            });
+        }
     }
 
     return (
@@ -113,7 +119,7 @@ export function AdminRoom() {
 
                                       <button
                                         type="button"
-                                        onClick={() => handleHighlightQuestion(question.id)}
+                                        onClick={() => handleHighlightQuestion(question.id, question.isHighlighted)}
                                       >
                                           <img src={answerImg} alt="Dar destaque à pergunta" />
                                       </button>
