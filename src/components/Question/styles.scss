@@ -103,6 +103,22 @@
                     color: #F8F8F8;
                 }
             }
+
+            button {
+                &.like-button {
+                    svg path {
+                        stroke: #f8f8f8;
+                    }
+
+                    &.liked {
+                        color: #f8f8f8;
+
+                        svg path {
+                            stroke: #714DDE;
+                        }
+                    }
+                }
+            }
         }
     }
 }

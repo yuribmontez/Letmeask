@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { useAuth } from '../hooks/useAuth'
 import { useRoom } from '../hooks/useRoom'
+import { useTheme } from '../hooks/useTheme';
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
 import { Question } from '../components/Question'
@@ -11,7 +12,9 @@ import toast, { Toaster } from 'react-hot-toast';
 import Switch from "react-switch";
 
 import logoImg from '../assets/images/logo.svg'
+import logoDark from '../assets/images/logo-dark.svg'
 import noQuestions from '../assets/images/no-questions.svg'
+import noQuestionsDark from '../assets/images/no-questions-dark.svg'
 
 import '../styles/room.scss'
 
@@ -26,6 +29,7 @@ export function Room() {
     const [newQuestion, setNewQuestion] = useState('')
     const [checked, setChecked] = useState(false)
     const { questions, title } = useRoom(roomId);
+    const { theme, toggleTheme } = useTheme();
 
     async function handleSendQuestion(event: FormEvent) {
         event.preventDefault();
@@ -66,16 +70,18 @@ export function Room() {
     }
 
     return (
-        <div id="page-room">
+        <div id="page-room" className={theme}>
         <Toaster position="top-left" />
             <header>
                 <div className="content">
-                    <img src={logoImg} alt="Letmeask" />
+                    { theme === 'light' ? <img src={logoImg} alt="Letmeask" /> : <img src={logoDark} alt="Letmeask" /> }
                     <div className='space'></div>
-                    {/* <RoomCode code={roomId}/> */}
+                    <div>
+                        <RoomCode code={roomId} theme={`room-code ${theme}`}/>
+                    </div>
                     <Switch 
-                        checked={checked}
-                        onChange={() => setChecked(!checked)}
+                        checked={theme === 'dark'}
+                        onChange={toggleTheme}
                         uncheckedIcon={false}
                         checkedIcon={false}
                         onColor="#714DDE"
@@ -116,7 +122,7 @@ export function Room() {
 
                 { questions.length < 1 && (
                     <div className='empty-questions'>
-                        <img src={noQuestions} alt="Sem perguntas" />
+                        { theme === 'light' ? <img src={noQuestions} alt="Sem perguntas" /> : <img src={noQuestionsDark} alt="Sem perguntas" /> }
                     </div>
                 ) }
 
@@ -129,6 +135,7 @@ export function Room() {
                                 author={question.author}
                                 isAnswered={question.isAnswered}
                                 isHighlighted={question.isHighlighted}
+                                theme={theme}
                             >
                                 {!question.isAnswered && (
                                     <button 

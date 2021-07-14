@@ -137,7 +137,7 @@
         }
 
         .content {
-            > div {
+            div {
                 button {
                     background: #29292E;
                     color: #f8f8f8;
@@ -157,6 +157,38 @@
                 span {
                     background: #6F4BD8;
                     color: #f8f8f8;
+                }
+            }
+
+            form {
+                textarea {
+                    background: #53535E;
+                    color: #f8f8f8;
+
+                    &::placeholder {
+                        color: #f8f8f8;
+                    }
+                }
+
+                .form-footer {
+                    span {
+                        color: #737380;
+
+                        button{
+                            color: #f8f8f8;
+                            text-decoration-color: #737380;
+                        }
+                    }
+
+                    .user-info {
+                        span {
+                            color: #f8f8f8;
+                        }
+                    }
+
+                    button {
+                        background: #714DDE;
+                    }
                 }
             }
         }
