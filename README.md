@@ -14,7 +14,7 @@ Letmeask is perfect for content creators to create Q&A rooms with their audience
 This project was developed during **[Next Level Week Together](https://nextlevelweek.com/)**, presented from the 20th to the 27th of June 2021.
 
 <h1 align="center">
-    <img alt="Letmeask" src="https://raw.githubusercontent.com/rocketseat-education/nlw-06-reactjs/d64687c482991f6796f56a335126cd658db7f53f/.github/cover.svg" />
+    <img alt="Letmeask" src="/public/cover.png" />
 </h1>
 
 <br>
@@ -60,6 +60,12 @@ You need to have an account at [Figma](http://figma.com/).
 
 This project is licensed under the MIT License - see the  [LICENSE](LICENSE.md) file for details.
 
+---
+## 📜 Log
+
+- Added Dark Mode;
+- Added Modals for deleting and ending rooms;
+- Added Toasts for error messages;
 ---
 <p align="center">
     Made with 💜 by Yuri
