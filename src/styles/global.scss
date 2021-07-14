@@ -6,6 +6,9 @@
 
 body {
     color: #29292e;
+    &.dark {
+        background-color: #29292E;
+    }
 }
 
 body, input, button, select, textarea {

@@ -17,6 +17,10 @@ export function ThemeContextProvider(props: ThemeContextProviderProps) {
     const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
         const storagedTheme = localStorage.getItem('theme')
 
+        if (storagedTheme === 'dark') {
+            document.body.classList.add('dark')
+        }
+        
         return (storagedTheme ?? 'light') as Theme;
     });
 
@@ -26,6 +30,7 @@ export function ThemeContextProvider(props: ThemeContextProviderProps) {
 
     function toggleTheme() {
         setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light');
+        currentTheme === 'light' ? document.body.classList.add('dark') : document.body.classList.remove('dark')
     }
 
     return (
