@@ -27,7 +27,6 @@ export function Room() {
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const [newQuestion, setNewQuestion] = useState('')
-    const [checked, setChecked] = useState(false)
     const { questions, title } = useRoom(roomId);
     const { theme, toggleTheme } = useTheme();
 
