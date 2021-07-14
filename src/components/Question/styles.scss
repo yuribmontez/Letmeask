@@ -16,6 +16,12 @@
         footer .user-info span {
             color: #29292e;
         }
+
+        footer button.answer-button {
+            svg path {
+                stroke: #835afd;
+            }
+        }
     }
     
     &.answered {
@@ -59,34 +65,60 @@
             background: transparent;
             cursor: pointer;
             transition: filter 0.2s;
-
+            
+            &:hover {
+                filter: brightness(0.8);
+            }
+            
             &.like-button {
                 display: flex;
                 align-items: flex-end;
                 color: #737380;
                 gap: 8px;
-
+                
                 &.liked {
                     color: #835afd;
-
+                    
                     svg path {
                         stroke: #835afd;
                     }
                 }
             }
 
-            &:hover {
-                filter: brightness(0.7);
+            &.answer-button {
+                &:hover {
+                    svg path{
+                        stroke: #835AFD;
+                    }
+                }
+            }
+
+            &.delete-button {
+                &:hover {
+                    svg path {
+                        stroke: #E73F5D;
+                    }
+                }
             }
         }
     }
 
     &.dark {
         background: #53535E;
-
+        transition: all 0.5s ease;
         &.highlighted {
             background: #70707E;
             border-color: #714DDE;
+
+            footer button.answer-button {
+                svg path {
+                    stroke: #714DDE;
+                    filter: brightness(0.9);
+                }
+                &:hover {
+                    filter: brightness(0.6);
+                }
+            }
         }
 
         &.answered {
@@ -115,6 +147,32 @@
 
                         svg path {
                             stroke: #714DDE;
+                        }
+                    }
+                }
+
+                &.check-button, 
+                &.answer-button,
+                &.delete-button {
+                    svg path,circle {
+                        stroke: #f8f8f8;
+                    }
+                }
+
+                &.answer-button {
+                    &:hover {
+                        filter: none;
+                        svg path {
+                            stroke: #835AFD;
+                        }
+                    }
+                }
+
+                &.delete-button {
+                    &:hover {
+                        filter: none;
+                        svg path {
+                            stroke: #C53952;
                         }
                     }
                 }
