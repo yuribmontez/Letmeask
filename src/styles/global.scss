@@ -62,4 +62,25 @@ body, input, button, select, textarea {
         background: #E73F5D;
         color: #fff;
     }
+
+    &.dark {
+        background: #29292E;
+        
+        h1 {
+            color: #f8f8f8;
+        }
+
+        p {
+            color: #DBDCDD;
+        }
+
+        button {
+            &:first-child {
+                background: #A8A8B3;
+                color: #f8f8f8;
+            }
+            background: #A43B4E;
+            color: #fefefe;
+        }
+    }
 }

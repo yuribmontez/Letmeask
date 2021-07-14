@@ -1,6 +1,7 @@
-import { useState, Fragment, useEffect } from 'react'
+import { useState, Fragment } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useRoom } from '../hooks/useRoom'
+import { useTheme } from '../hooks/useTheme';
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
 import { Question } from '../components/Question'
@@ -9,12 +10,19 @@ import Modal from 'react-modal';
 import Switch from "react-switch";
 
 import logoImg from '../assets/images/logo.svg'
+import logoDark from '../assets/images/logo-dark.svg'
 import deleteImg from '../assets/images/delete.svg'
+import deleteDark from '../assets/images/delete-dark.svg'
 import checkImg from '../assets/images/check.svg'
+import checkDark from '../assets/images/check-dark.svg'
 import answerImg from '../assets/images/answer.svg'
-import noQuestions from '../assets/images/no-questions.svg'
+import answerDark from '../assets/images/answer-dark.svg'
+import noQuestions from '../assets/images/no-questions-admin.svg'
+import noQuestionsDark from '../assets/images/no-questions-admin-dark.svg'
 import endRoom from '../assets/images/end-room-icon.svg'
+import endRoomDark from '../assets/images/end-room-icon-dark.svg'
 import trash from '../assets/images/trash-icon.svg'
+import trashDark from '../assets/images/trash-icon-dark.svg'
 
 import '../styles/room.scss'
 
@@ -23,15 +31,14 @@ type RoomParams = {
 }
 
 export function AdminRoom() {
-    // const { user } = useAuth();
     const history = useHistory();
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const [openDeleteModal, setOpenDeleteModal] = useState<string | undefined>()
     const [endRoomModal, setEndRoomModal] = useState<boolean>(false)
-    const [checked, setChecked] = useState(false)
     const { questions, title } = useRoom(roomId);
-
+    const { theme, toggleTheme } = useTheme();
+    
     async function handleEndRoom() {
         await database.ref(`rooms/${roomId}`).update({
             endedAt: new Date(),
@@ -63,18 +70,18 @@ export function AdminRoom() {
     }
 
     return (
-        <div id="page-room">
+        <div id="page-room" className={theme}>
 
             <header>
                 <div className="content">
-                    <img src={logoImg} alt="Letmeask" />
+                    {theme === 'light' ? <img src={logoImg} alt="Letmeask" /> : <img src={logoDark} alt="Letmeask" /> }
                     <div>
-                        <div className='teste'></div>
-                        <RoomCode code={roomId}/>
+                        <div className='space'></div>
+                        <RoomCode code={roomId} theme={theme}/>
                         <Button isOutlined onClick={() => setEndRoomModal(true)}>Encerrar sala</Button>
                         <Switch 
-                          checked={checked}
-                          onChange={() => setChecked(!checked)}
+                          checked={theme === 'dark'}
+                          onChange={toggleTheme}
                           className='switch'
                           uncheckedIcon={false}
                           checkedIcon={false}
@@ -85,10 +92,11 @@ export function AdminRoom() {
                 <Modal
                   isOpen={endRoomModal === true}
                   onRequestClose={() => setEndRoomModal(false)}
-                  className="modal-content"
+                  className={`modal-content ${theme}`}
                   overlayClassName="modal-overlay"
+                  bodyOpenClassName={null}
                 >
-                    <img src={endRoom} alt="End room icon" />
+                    { theme === 'light' ? <img src={endRoom} alt="End room icon" /> : <img src={endRoomDark} alt="End room icon" /> }
                     <h1>Encerrar sala</h1>
                     <p>Tem certeza que você deseja encerrar esta sala?</p>
                     <div>
@@ -105,7 +113,7 @@ export function AdminRoom() {
                 </div>
                 { questions.length < 1 && (
                     <div className='empty-questions'>
-                        <img src={noQuestions} alt="Sem perguntas" />
+                        {theme === 'light' ? <img src={noQuestions} alt="Sem perguntas" /> :  <img src={noQuestionsDark} alt="Sem perguntas" /> }
                     </div>
                 ) }
 
@@ -118,6 +126,7 @@ export function AdminRoom() {
                               author={question.author}
                               isAnswered={question.isAnswered}
                               isHighlighted={question.isHighlighted}
+                              theme={theme}
                             >
                               {!question.isAnswered && (
                                   <>
@@ -125,14 +134,14 @@ export function AdminRoom() {
                                         type="button"
                                         onClick={() => handleCheckQuestionAsAnswered(question.id)}
                                       >
-                                          <img src={checkImg} alt="Marcar pergunta como respondida" />
+                                        { theme === 'light' ? <img src={checkImg} alt="Marcar pergunta como respondida" /> : <img src={checkDark} alt="Marcar pergunta como respondida" /> }
                                       </button>
 
                                       <button
                                         type="button"
                                         onClick={() => handleHighlightQuestion(question.id, question.isHighlighted)}
                                       >
-                                          <img src={answerImg} alt="Dar destaque à pergunta" />
+                                          { theme === 'light' ? <img src={answerImg} alt="Dar destaque à pergunta" /> : <img src={answerDark} alt="Dar destaque à pergunta" /> }
                                       </button>
                                   </>
                               )}
@@ -140,16 +149,17 @@ export function AdminRoom() {
                                 type="button"
                                 onClick={() => setOpenDeleteModal(question.id)}
                               >
-                                  <img src={deleteImg} alt="Remover pergunta" />
+                                  { theme === 'light' ? <img src={deleteImg} alt="Remover pergunta" /> : <img src={deleteDark} alt="Remover pergunta" /> } 
                               </button>
                             </Question>
                             <Modal
                               isOpen={openDeleteModal === question.id}
                               onRequestClose={() => setOpenDeleteModal(undefined)}
-                              className="modal-content"
+                              className={`modal-content ${theme}`}
                               overlayClassName="modal-overlay"
+                              bodyOpenClassName={null}
                             >
-                              <img src={trash} alt="Delete icon" />
+                              { theme === 'light' ? <img src={trash} alt="Delete icon" /> : <img src={trashDark} alt="Delete icon" /> }
                               <h1>Excluir pergunta</h1>
                               <p>Tem certeza que você deseja excluir esta pergunta?</p>
                               <div>

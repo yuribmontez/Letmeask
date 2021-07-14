@@ -41,8 +41,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
 
+        .switch {
+            position: absolute !important;
+            top: 24px !important;
+            right: 40px !important;
+        }
+    }
+    
     .main-content {
         display: flex;
         flex-direction: column;
@@ -139,5 +145,55 @@
             background: #a8a8b3;
             margin-left: 16px;
         }
+    }
+
+    &.dark {
+        aside {
+            background: #714DDE;
+        }
+
+        main {
+            background: #29292E;
+        }
+
+        .main-content {
+
+            h2 {
+                color: #F8F8F8;
+            }
+
+            form {
+                button {
+                    background: #714DDE;
+                }
+            }
+
+            p {
+                color: #DBDCDD;
+
+                a {
+                    color: #fff;
+                }
+            }
+
+        }
+
+        .create-room {
+            background: #53535E;
+            color: #fefefe;
+        }
+
+        .separator {
+            color: #DBDCDD;
+
+            &::before {
+                background: #DBDCDD;
+            }
+
+            &::after {
+                background: #DBDCDD;
+            }
+        }
+        transition: all 0.5s ease;
     }
 }

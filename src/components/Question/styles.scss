@@ -80,4 +80,29 @@
             }
         }
     }
+
+    &.dark {
+        background: #53535E;
+
+        &.highlighted {
+            background: #70707E;
+            border-color: #714DDE;
+        }
+
+        &.answered {
+            background: #9F9FAA;
+        }
+        
+        p {
+            color: #F8F8F8;
+        }
+
+        footer {
+            .user-info {
+                span {
+                    color: #F8F8F8;
+                }
+            }
+        }
+    }
 }

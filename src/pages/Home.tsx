@@ -1,14 +1,17 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { useTheme } from '../hooks/useTheme';
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
 import { Button } from '../components/Button';
 import toast, { Toaster } from 'react-hot-toast';
+import Switch from "react-switch";
 
 
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg'
+import logoDark from '../assets/images/logo-dark.svg'
 import googleIconImg from '../assets/images/google-icon.svg'
 
 
@@ -16,6 +19,7 @@ import '../styles/auth.scss';
 
 export function Home() {
     const history = useHistory();
+    const { theme, toggleTheme } = useTheme();
     const { user, signInWithGoogle } = useAuth();
     const [roomCode, setRoomCode] = useState('');
 
@@ -54,7 +58,7 @@ export function Home() {
     }
 
     return (
-        <div id="page-auth">
+        <div id="page-auth" className={theme}>
 
             <aside>
                 <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
@@ -63,8 +67,16 @@ export function Home() {
             </aside>
 
             <main>
+                <Switch 
+                    checked={theme === 'dark'}
+                    onChange={toggleTheme}
+                    className='switch'
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    onColor="#714DDE"
+                />
                 <div className="main-content">
-                    <img src={logoImg} alt="Letmeask" />
+                    {theme === 'light' ? <img src={logoImg} alt="Letmeask" /> : <img src={logoDark} alt="Letmeask" /> }
                     <button onClick={handleCreateRoom} className="create-room">
                         <img src={googleIconImg} alt="Logo Google" />
                         Crie sua sala com o Google

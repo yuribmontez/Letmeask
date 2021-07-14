@@ -28,7 +28,7 @@
                 }
             }
 
-            .teste {
+            .space {
                 flex: 0.8 !important;
             }
         }
@@ -118,11 +118,48 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-top: 50px;
+            position: absolute;
+            right: 0;
+            top: 400px;
         }
 
         .question-list {
             margin-top: 32px;
         }
+    }
+
+    &.dark {
+        height: 100%;
+        background: #29292E;
+
+        header{
+            border-color: #E2E2E2;
+        }
+
+        .content {
+            > div {
+                button {
+                    background: #29292E;
+                    color: #f8f8f8;
+                    border-color: #714DDE;
+                }
+            }
+        }
+
+        main {
+            height: 100vh; // TEMP
+
+            .room-title {
+                h1{
+                    color: #F8F8F8;
+                }
+
+                span {
+                    background: #6F4BD8;
+                    color: #f8f8f8;
+                }
+            }
+        }
+        transition: all 0.5s ease;
     }
 }

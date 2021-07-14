@@ -71,8 +71,8 @@ export function Room() {
             <header>
                 <div className="content">
                     <img src={logoImg} alt="Letmeask" />
-                    <div className='teste'></div>
-                    <RoomCode code={roomId}/>
+                    <div className='space'></div>
+                    {/* <RoomCode code={roomId}/> */}
                     <Switch 
                         checked={checked}
                         onChange={() => setChecked(!checked)}
